@@ -1,13 +1,28 @@
 /*
  * @Date: 2023-01-15 15:05:15
  * @LastEditors: EchoWang
- * @LastEditTime: 2023-02-07 15:21:30
- * @FilePath: \Jira\src\screens\project-list\search-panel.jsx
+ * @LastEditTime: 2023-02-07 17:33:32
+ * @FilePath: \Jira\src\screens\project-list\search-panel.tsx
  * @Description: 
  */
-import { useEffect, useState } from "react"
+import React from "react";
+interface SearchPanelProps {
+    users: User[],
+    param:{
+        name: string,
+        personId: string;
+    },
+    setParam: (param:SearchPanelProps['param']) => void;
+}
+export interface User {
+    id:string;
+    name:string;
+    email:string;
+    title:string;
+    organization:string;
+}
 
-export const SearchPanel = (props) => {
+export const SearchPanel = (props:SearchPanelProps) => {
     const {param, setParam,users} = props
 
 

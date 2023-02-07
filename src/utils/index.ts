@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 /*
  * @Date: 2023-01-15 21:26:56
  * @LastEditors: EchoWang
- * @LastEditTime: 2023-02-07 17:36:36
+ * @LastEditTime: 2023-02-07 18:25:39
  * @FilePath: \Jira\src\utils\index.ts
  * @Description:
  */
-export const isFalsy = (value: any) => (value === 0 ? false : !value);
+export const isFalsy = (value: unknown) => (value === 0 ? false : !value);
 // 在一个函数里，改变传入的对象本身是不好的
 export const cleanObject = (object:object) => {
   const result = { ...object };
@@ -27,7 +27,7 @@ export const useMount = (callback:()=>void) => {
     callback();
   }, []);
 };
-export const useDebounce = (value:any, delay?:number) => {
+export const useDebounce = <V>(value:V, delay?:number) => {
   const [debouncedValue, setDebouncedValue] = useState(value);
   useEffect(() => {
     // 每次在value变化以后，设置一个定时器

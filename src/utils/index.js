@@ -1,7 +1,9 @@
+import { useEffect, useState } from "react";
+
 /*
  * @Date: 2023-01-15 21:26:56
  * @LastEditors: EchoWang
- * @LastEditTime: 2023-02-06 23:04:47
+ * @LastEditTime: 2023-02-07 15:37:44
  * @FilePath: \Jira\src\utils\index.js
  * @Description:
  */
@@ -16,4 +18,20 @@ export const cleanObject = (object) => {
     }
   });
   return result;
+};
+
+export const useMount = (callback) => {
+  useEffect(() => {
+    callback();
+  }, []);
+};
+export const useDebounce = (value, delay) => {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+  useEffect(() => {
+    // 每次在value变化以后，设置一个定时器
+    const timeout = setTimeout(() => setDebouncedValue(value), delay);
+    // 每次在上一个useEffect处理完以后再运行
+    return () => clearTimeout(timeout);
+  }, [value, delay]);
+  return debouncedValue;
 };

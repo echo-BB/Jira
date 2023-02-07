@@ -1,3 +1,10 @@
+/*
+ * @Date: 2023-01-15 16:29:13
+ * @LastEditors: EchoWang
+ * @LastEditTime: 2023-02-07 15:42:00
+ * @FilePath: \Jira\src\index.tsx
+ * @Description: 
+ */
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
@@ -13,9 +20,7 @@ const root = ReactDOM.createRoot(
 
 
 root.render(
-  <React.StrictMode>
     <App />
-  </React.StrictMode>
 );
 
 

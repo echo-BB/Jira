@@ -1,18 +1,16 @@
 /*
  * @Date: 2023-01-15 15:05:15
  * @LastEditors: EchoWang
- * @LastEditTime: 2023-01-15 15:17:53
- * @FilePath: \jira\src\screens\project-list\search-panel.jsx
+ * @LastEditTime: 2023-01-15 21:23:58
+ * @FilePath: \Jira\src\screens\project-list\search-panel.jsx
  * @Description: 
  */
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
-export const SearchPanel = () => {
-    const [param, setParam] = useState({
-        name:'',
-        personId: ''
-    })
-    const [users, setUsers] = useState([]) 
+export const SearchPanel = (props) => {
+    const {param, setParam,users} = props
+
+
     return <form>
         <div>
             <input type="text" value={param.name} onChange={evt=>setParam({
@@ -24,7 +22,12 @@ export const SearchPanel = () => {
                 personId: evt.target.value
             })}>
                 <option value={''}>负责人</option>
-                <option value={''}>负责人</option>
+                {
+                    users.map((user,index) => 
+                    <option value={user.id} key={index}>
+                        {user.name}
+                    </option>)
+                }
             </select>
         </div>
     </form>

@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
 
 /*
- * @Date: 2023-01-15 21:26:56
+* @Date: 2023-01-15 21:26:56
  * @LastEditors: EchoWang
- * @LastEditTime: 2023-02-07 18:25:39
+ * @LastEditTime: 2023-02-10 17:22:36
  * @FilePath: \Jira\src\utils\index.ts
- * @Description:
- */
+* @Description:
+*/
+import { useEffect, useState } from "react";
 export const isFalsy = (value: unknown) => (value === 0 ? false : !value);
 // 在一个函数里，改变传入的对象本身是不好的
 export const cleanObject = (object:object) => {
@@ -37,3 +37,17 @@ export const useDebounce = <V>(value:V, delay?:number) => {
   }, [value, delay]);
   return debouncedValue;
 };
+export const useArray = <V>(personsValue:V[])=>{
+  const [value, setValue] = useState<V[]>(personsValue);
+  const add = (person:V)=>{
+    setValue([person,...value])
+  };
+  const removeIndex = (index:number) => {
+    const newArray = value.slice(0, value.length)
+    setValue(newArray.slice(1,newArray.length));
+  }
+  const clear = ()=>{
+    setValue([])
+  }
+  return {value, add, removeIndex, clear}
+}

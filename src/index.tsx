@@ -1,7 +1,7 @@
 /*
  * @Date: 2023-01-15 16:29:13
  * @LastEditors: EchoWang
- * @LastEditTime: 2023-02-18 17:04:35
+ * @LastEditTime: 2023-02-22 20:10:07
  * @FilePath: \Jira\src\index.tsx
  * @Description: 
  */
@@ -11,6 +11,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { loadDevTools } from "jira-dev-tool";
+import { AppProviders } from 'context';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -19,7 +20,9 @@ const root = ReactDOM.createRoot(
 
 loadDevTools(()=>root.render(
   <React.StrictMode>
-    <App />
+    <AppProviders>
+      <App/>
+    </AppProviders>
   </React.StrictMode>
 ))
 

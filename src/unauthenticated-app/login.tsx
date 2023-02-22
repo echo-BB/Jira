@@ -2,11 +2,12 @@
 /*
 * @Date: 2023-02-12 22:57:09
  * @LastEditors: EchoWang
- * @LastEditTime: 2023-02-18 16:50:07
- * @FilePath: \Jira\src\screens\login\index.tsx
+ * @LastEditTime: 2023-02-22 23:38:06
+ * @FilePath: \Jira\src\unauthenticated-app\login.tsx
 * @Description: 
 */
 //LoginScreen.tsx
+import { useAuth } from 'context/auth-context';
 import { FC, FormEvent, ReactElement } from 'react';
 
 interface IProps {}
@@ -14,32 +15,20 @@ interface Iparams {
   username: string;
   password: string;
 }
-const apiUrl = process.env.REACT_APP_API_URL;
+
 export const LoginScreen: FC<IProps> = (): ReactElement => {
-  const loginMethod = (params: Iparams) => {
-    fetch(`${apiUrl}/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(params),
-    }).then(async (res) => {
-      if (res.ok) {
-        let data = await res.json();
-        console.log(data);
-      }
-    });
-  };
+  const {login, user} = useAuth()
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const username = (event.currentTarget.elements[0] as HTMLInputElement).value;
     const password = (event.currentTarget.elements[1] as HTMLInputElement).value;
-    loginMethod({ username, password });
+    login({ username, password });
   };
   return (
     <>
-      <div style={{ width: '800px', margin: '0 auto' }}>
+
         <form onSubmit={handleSubmit}>
+
           <div>
             <label htmlFor={'username'}>用户名</label>
             <input type="text" id={'username'} />
@@ -50,7 +39,6 @@ export const LoginScreen: FC<IProps> = (): ReactElement => {
           </div>
           <button type={'submit'}>登录</button>
         </form>
-      </div>
     </>
   );
 };
